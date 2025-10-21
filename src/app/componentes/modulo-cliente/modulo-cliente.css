@@ -1,0 +1,45 @@
+/* Estilos para la página de consulta de clientes */
+
+.container-fluid {
+  background-color: #f8f9fc;
+}
+
+.card {
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e3e6f0;
+  padding: 1rem 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.btn-primary-custom {
+  background-color: #6236CB;
+  border-color: #6236CB;
+  color: #fff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary-custom:hover {
+  background-color: #532db4;
+  border-color: #532db4;
+}
+
+/* Estilos para la tabla */
+.table-responsive {
+  max-height: 60vh; /* Altura máxima antes de mostrar scroll */
+}
+
+.table thead th {
+  font-weight: 500;
+}
+
+.table td, .table th {
+  white-space: nowrap; /* Evita que el texto se parta en varias líneas */
+}

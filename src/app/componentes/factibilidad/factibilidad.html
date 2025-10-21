@@ -1,0 +1,57 @@
+<div class="form-container">
+  <div class="card shadow">
+    <div class="card-header">
+      <h5 class="m-0">Nuevo Estudio de Factibilidad</h5>
+    </div>
+    <div class="card-body">
+      <!-- El atributo novalidate previene la validación HTML5 por defecto -->
+      <form (ngSubmit)="onSubmit()" #factibilidadForm="ngForm" novalidate>
+        
+        <!-- Nombre del Proyecto -->
+        <div class="mb-3">
+          <label for="projectName" class="form-label">Nombre del Proyecto</label>
+          <input type="text" class="form-control" id="projectName" name="projectName" [(ngModel)]="studyData.projectName" required>
+        </div>
+
+        <!-- Cliente (Dropdown) -->
+        <div class="mb-3">
+          <label for="client" class="form-label">Cliente Asociado</label>
+          <select class="form-select" id="client" name="client" [(ngModel)]="studyData.client" required>
+            <option value="" disabled>Selecciona un cliente...</option>
+            <option *ngFor="let client of clients" [value]="client">{{ client }}</option>
+          </select>
+        </div>
+
+        <!-- Dirección -->
+        <div class="mb-3">
+          <label for="address" class="form-label">Dirección o Ubicación</label>
+          <input type="text" class="form-control" id="address" name="address" [(ngModel)]="studyData.address">
+        </div>
+
+        <!-- Tipo de Servicio -->
+        <div class="mb-3">
+          <label for="serviceType" class="form-label">Tipo de Servicio</label>
+          <select class="form-select" id="serviceType" name="serviceType" [(ngModel)]="studyData.serviceType">
+            <option>Fibra Óptica</option>
+            <option>Radioenlace</option>
+            <option>Conectividad Satelital</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+        <!-- Notas Técnicas -->
+        <div class="mb-3">
+          <label for="technicalNotes" class="form-label">Notas Técnicas</label>
+          <textarea class="form-control" id="technicalNotes" name="technicalNotes" rows="4" [(ngModel)]="studyData.technicalNotes"></textarea>
+        </div>
+
+        <!-- Botón de Envío -->
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary-custom" [disabled]="!factibilidadForm.form.valid">
+            Guardar Estudio
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<!-- 
+  Este es el HTML para el dashboard principal.
+  Usa los datos del archivo .ts para mostrar la informacion.
+-->
+<div class="dashboard-container">
+  
+  <!-- Fila de Tarjetas de Resumen -->
+  <div class="row">
+    <div *ngFor="let card of summaryCards" class="col-xl-4 col-md-6 mb-4">
+      <div class="card shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col me-2">
+              <div class="text-xs fw-bold text-uppercase mb-1" [style.color]="card.color">
+                {{ card.title }}
+              </div>
+              <div class="h5 mb-0 fw-bold text-gray-800">{{ card.value }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="{{ card.icon }} fs-2 text-gray-300" [style.color]="card.color + '60'"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estudios Recientes -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 fw-bold">Estudios Recientes</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cliente</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let study of recentStudies">
+              <td>{{ study.name }}</td>
+              <td>{{ study.client }}</td>
+              <td>{{ study.status }}</td>
+              <td>{{ study.date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráficos (placeholders) -->
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 fw-bold">Distribución de Estudios por Estado</h6>
+        </div>
+        <div class="card-body">
+          <p class="text-center text-muted p-5">Aquí iría el Gráfico 1</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+       <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 fw-bold">Gráfico 2</h6>
+        </div>
+        <div class="card-body">
+          <p class="text-center text-muted p-5">Aquí iría el Gráfico 2</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

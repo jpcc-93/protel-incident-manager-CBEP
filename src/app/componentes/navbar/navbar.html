@@ -1,0 +1,49 @@
+<nav class="sidebar" [class.open]="isSidebarOpen" [class.collapsed]="!isSidebarOpen">
+  <div class="sidebar-header">
+    <h3>MENU</h3>
+        <button class="collapse-toggle" type="button" (click)="toggleSidebar()" aria-label="Alternar menú">
+          <i class="bi" [class.bi-chevron-left]="isSidebarOpen" [class.bi-list]="!isSidebarOpen"></i>
+    </button>
+  </div>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">
+        <i class="bi bi-house-door-fill"></i>
+        <span>Inicio</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#clientesSubmenu" role="button" aria-expanded="false"
+        aria-controls="clientesSubmenu">
+        <i class="bi bi-people-fill"></i>
+        <span>Clientes</span>
+        <i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul class="collapse list-unstyled" id="clientesSubmenu">
+        <li><a class="nav-link submenu-item" href="#">Registrar</a></li>
+        <li><a class="nav-link submenu-item" href="#">Ver Clientes</a></li>
+      </ul>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#factibilidadSubmenu" role="button" aria-expanded="false"
+        aria-controls="factibilidadSubmenu">
+        <i class="bi bi-check2-square"></i>
+        <span>Factibilidad</span>
+        <i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul class="collapse list-unstyled" id="factibilidadSubmenu">
+        <li><a class="nav-link submenu-item" href="#">Nueva</a></li>
+        <li><a class="nav-link submenu-item" href="#">Consultar</a></li>
+      </ul>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="bi bi-info-circle-fill"></i>
+        <span>Acerca de</span>
+      </a>
+    </li>
+  </ul>
+</nav>

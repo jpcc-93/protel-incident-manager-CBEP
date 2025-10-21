@@ -1,0 +1,52 @@
+/* Mantenemos los estilos consistentes con los otros formularios */
+
+.form-container {
+  padding: 2rem;
+  background-color: #f8f9fc;
+  /* permite que el formulario se expanda en el escritorio manteniendo un ancho máximo cómodo */
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .form-container {
+    padding: 1rem;
+    max-width: 420px;
+  }
+}
+.card {
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e3e6f0;
+  padding: 1rem 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.btn-primary-custom {
+  background-color: #6236CB;
+  border-color: #6236CB;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.3rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary-custom:hover {
+  background-color: #532db4;
+  border-color: #532db4;
+}
+
+.btn-primary-custom:disabled {
+  background-color: #a58ee9;
+  border-color: #a58ee9;
+  cursor: not-allowed;
+}

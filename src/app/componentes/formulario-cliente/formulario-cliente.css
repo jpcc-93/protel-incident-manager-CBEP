@@ -1,0 +1,26 @@
+/* Estilos para darle un aspecto más profesional al formulario */
+
+:host {
+  display: block;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #343a40;
+}
+
+.btn-primary {
+  background-color: #6236CB;
+  border-color: #6236CB;
+}
+
+.btn-primary:hover {
+  background-color: #532db3;
+  border-color: #532db3;
+}

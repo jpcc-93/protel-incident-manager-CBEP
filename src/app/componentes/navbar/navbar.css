@@ -1,0 +1,144 @@
+:host {
+  display: block;
+}
+
+/* --- Botón de Hamburguesa --- */
+.hamburger-button {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2c3e50; /* Color del botón */
+  /* Este botón debería estar en tu Topbar */
+}
+
+/* --- Media Query para pantallas grandes (Escritorio) --- */
+@media (min-width: 768px) {
+  .hamburger-button {
+    display: none; /* Ocultamos el botón en escritorio */
+  }
+
+  .sidebar {
+    left: 0; /* La sidebar es visible por defecto */
+    position: static; /* Ya no es fija, es parte del flujo normal */
+    height: auto;
+  }
+
+  /* Empujamos el contenido principal para que no quede debajo de la sidebar */
+  .main-content {
+    margin-left: 0; /* Reseteamos el margen */
+  }
+
+  /* En este caso, el main-container se encarga de posicionarlos */
+  .main-container {
+    display: flex;
+  }
+}
+
+.hamburger-button span {
+  width: 2rem;
+  height: 0.25rem;
+  background: white;
+  border-radius: 10px;
+}
+
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #6236CB;
+  /* Color morado de la imagen */
+  color: #fff;
+  padding: 1rem;
+}
+
+/* Cuando la sidebar tiene la clase 'open', se desliza hacia adentro */
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-header {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-item {
+  margin-bottom: 0.5rem;
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link i {
+  font-size: 1.4rem;
+  /* Iconos un poco más grandes */
+  margin-right: 1rem;
+}
+
+/* Estilo para la flecha de despliegue */
+.nav-link .bi-chevron-down {
+  font-size: 0.8rem;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.3s ease;
+}
+
+/* Rotar la flecha cuando el menú está abierto */
+.nav-link[aria-expanded="true"] .bi-chevron-down {
+ 
+/* Estado colapsado: deslizar fuera de la vista */
+.sidebar.collapsed {
+  transform: translateX(-110%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.collapse-toggle {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.5rem;
+}
+
+/* Coloca el botón a la derecha dentro del header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+  transform: rotate(180deg);
+}
+
+/* Estilos para el submenú */
+.collapse {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.submenu-item {
+  font-size: 1rem;
+  padding-left: 3.5rem !important;
+  /* Alinea el texto con el del menú principal */
+}

@@ -1,0 +1,32 @@
+/* Estilos específicos para el dashboard, para que se vea como en la imagen.
+*/
+
+.card {
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e3e6f0;
+}
+
+.text-gray-300 {
+  color: #dddfeb !important;
+}
+
+.text-gray-800 {
+  color: #5a5c69 !important;
+}
+
+.fw-bold {
+  font-weight: 700 !important;
+}
+
+.text-xs {
+  font-size: .8rem;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fc;
+}
