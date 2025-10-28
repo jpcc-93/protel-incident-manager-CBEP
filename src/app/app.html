@@ -1,6 +1,25 @@
-<app-navbar></app-navbar>
-<app-topbar></app-topbar>
+<!-- 
+  app.html: El contenedor principal de la aplicación.
 
-<main class="main-content">
-  <router-outlet></router-outlet>
-</main>
+  - div class="app-container": Envuelve toda la aplicación y aplica una clase cuando la barra lateral está cerrada 
+    para ajustar el diseño del contenido principal.
+  - app-topbar: La barra de navegación superior. Emite un evento (toggleSidebar) cuando se hace clic en el botón de menú.
+  - app-navbar: La barra de navegación lateral (sidebar). Recibe el estado [isSidebarOpen] para saber si debe mostrarse o no.
+  - main class="main-content": El área donde se renderizarán las rutas (tus páginas).
+-->
+<div class="app-container" [class.sidebar-collapsed]="!isSidebarOpen()">
+
+  <!-- La barra superior emite un evento para abrir/cerrar el menú -->
+  <app-topbar (toggleSidebar)="toggleSidebar()"></app-topbar>
+
+  <div class="main-layout">
+    <!-- La barra lateral recibe el estado para mostrarse u ocultarse -->
+    <app-navbar [isSidebarOpen]="isSidebarOpen()"></app-navbar>
+
+    <!-- El contenido principal se ajusta según el estado de la barra lateral -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>

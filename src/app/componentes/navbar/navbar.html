@@ -1,48 +1,61 @@
-<nav class="sidebar" [class.open]="isSidebarOpen" [class.collapsed]="!isSidebarOpen">
+<!-- 
+  navbar.html: Define la estructura de la barra de navegación lateral (sidebar).
+
+  - La clase '.sidebar' es la raíz del componente.
+  - [class.open]="isSidebarOpen": Aplica la clase 'open' cuando la variable 'isSidebarOpen' es verdadera.
+    Esto controla la visibilidad en dispositivos móviles.
+  - El botón de colapso ha sido eliminado de aquí, ya que ahora se controla desde la Topbar.
+-->
+<nav class="sidebar" [class.open]="isSidebarOpen">
+
+  <!-- Cabecera de la barra lateral -->
   <div class="sidebar-header">
-    <h3>MENU</h3>
-        <button class="collapse-toggle" type="button" (click)="toggleSidebar()" aria-label="Alternar menú">
-          <i class="bi" [class.bi-chevron-left]="isSidebarOpen" [class.bi-list]="!isSidebarOpen"></i>
-    </button>
+    <span class="sidebar-title">MENU</span>
   </div>
-  <ul class="nav flex-column">
+
+  <!-- Lista de enlaces de navegación -->
+  <ul class="nav-list">
+    <!-- Enlace a Inicio -->
     <li class="nav-item">
-      <a class="nav-link active" href="#">
+      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
         <i class="bi bi-house-door-fill"></i>
-        <span>Inicio</span>
+        <span class="link-text">Inicio</span>
       </a>
     </li>
 
+    <!-- Menú desplegable para Clientes -->
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#clientesSubmenu" role="button" aria-expanded="false"
-        aria-controls="clientesSubmenu">
+      <!-- Este enlace activa el submenú usando los atributos de Bootstrap 'data-bs-toggle' y 'href' -->
+      <a class="nav-link" data-bs-toggle="collapse" href="#clientesSubmenu" role="button" aria-expanded="false" aria-controls="clientesSubmenu">
         <i class="bi bi-people-fill"></i>
-        <span>Clientes</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
+        <span class="link-text">Clientes</span>
+        <i class="bi bi-chevron-down ms-auto dropdown-icon"></i>
       </a>
+      <!-- Submenú que se colapsa -->
       <ul class="collapse list-unstyled" id="clientesSubmenu">
-        <li><a class="nav-link submenu-item" href="#">Registrar</a></li>
-        <li><a class="nav-link submenu-item" href="#">Ver Clientes</a></li>
+        <li><a class="nav-link submenu-item" routerLink="/formulario-cliente" routerLinkActive="active">Registrar</a></li>
+        <li><a class="nav-link submenu-item" routerLink="/modulo-cliente" routerLinkActive="active">Ver Clientes</a></li>
       </ul>
     </li>
 
+    <!-- Menú desplegable para Factibilidad -->
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#factibilidadSubmenu" role="button" aria-expanded="false"
-        aria-controls="factibilidadSubmenu">
+      <a class="nav-link" data-bs-toggle="collapse" href="#factibilidadSubmenu" role="button" aria-expanded="false" aria-controls="factibilidadSubmenu">
         <i class="bi bi-check2-square"></i>
-        <span>Factibilidad</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
+        <span class="link-text">Factibilidad</span>
+        <i class="bi bi-chevron-down ms-auto dropdown-icon"></i>
       </a>
       <ul class="collapse list-unstyled" id="factibilidadSubmenu">
-        <li><a class="nav-link submenu-item" href="#">Nueva</a></li>
+        <li><a class="nav-link submenu-item" routerLink="/factibilidad" routerLinkActive="active">Nueva</a></li>
         <li><a class="nav-link submenu-item" href="#">Consultar</a></li>
       </ul>
     </li>
 
+    <!-- Enlace a Acerca de -->
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" routerLink="/acerca-de" routerLinkActive="active">
         <i class="bi bi-info-circle-fill"></i>
-        <span>Acerca de</span>
+        <span class="link-text">Acerca de</span>
       </a>
     </li>
   </ul>

@@ -1,32 +1,28 @@
 <!-- 
-  He reestructurado esto para usar mejor las clases de Bootstrap.
-  Ahora, el título y los íconos están agrupados a la derecha.
+  topbar.html: Define la estructura de la barra de navegación superior.
 -->
 <nav class="topbar">
-  <div class="container-fluid">
-    <!-- Lado Izquierdo: Botón de menú -->
-    <button class="menu-toggle-btn">
-      <i class="bi bi-list"></i>
-    </button>
 
-    <!-- Lado Derecho: Título e íconos -->
-    <!-- La clase "ms-auto" (margin-start: auto) empuja todo este grupo a la derecha -->
-    <div class="d-flex align-items-center ms-auto">
-      
-      <!-- Título PROTEL. La clase "me-4" (margin-end) le da espacio a la derecha. -->
-      <span class="topbar-title me-4">PROTEL</span>
-      
-      <!-- Ícono de tres puntos -->
-      <a href="#" class="topbar-icon me-3">
-        <i class="bi bi-three-dots-vertical"></i>
-      </a>
-      
-      <!-- Ícono de la persona -->
-      <a href="#" class="topbar-icon">
-        <i class="bi bi-person"></i>
-      </a>
+  <!-- Botón para abrir/cerrar el menú lateral.
+       (click)="onMenuClick()" llama a la función en topbar.ts que emite el evento hacia el padre.
+  -->
+  <button class="menu-toggle-btn" (click)="onMenuClick()">
+    <i class="bi bi-list"></i>
+  </button>
 
-    </div>
+  <!-- Contenedor para los elementos del lado derecho -->
+  <div class="topbar-right">
+    
+    <!-- Título de la aplicación -->
+    <span class="topbar-title">PROTEL</span>
+    
+    <!-- Iconos de la derecha (ej. notificaciones, perfil) -->
+    <a href="#" class="topbar-icon">
+      <i class="bi bi-three-dots-vertical"></i>
+    </a>
+    <a href="#" class="topbar-icon">
+      <i class="bi bi-person"></i>
+    </a>
+
   </div>
 </nav>
-
