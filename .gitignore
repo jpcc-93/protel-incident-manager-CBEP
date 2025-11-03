@@ -44,3 +44,12 @@ Thumbs.db
 
 # private files of gemini
 GEMINI.md
+
+# Reference .NET project
+/protel-app-ref/
+
+# .NET Core
+/ProtelApi/bin/
+/ProtelApi/obj/
+/ProtelApi/.vs/
+/ProtelApi/*.user

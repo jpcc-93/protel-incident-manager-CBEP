@@ -2,18 +2,14 @@ import { Component, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './componentes/navbar/navbar';
 import { Topbar } from './componentes/topbar/topbar';
-import { FormularioCliente } from './componentes/formulario-cliente/formulario-cliente';
-import { Dashboard } from './componentes/dashboard/dashboard';
-import { Factibilidad } from './componentes/factibilidad/factibilidad';
-import { AcercaDe } from './componentes/acerca-de/acerca-de';
-import { ModuloCliente } from './componentes/modulo-cliente/modulo-cliente';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,Navbar,Topbar,FormularioCliente,Dashboard
-    ,Factibilidad,AcercaDe,ModuloCliente],
+  standalone: true,
+  imports: [RouterOutlet,Navbar,Topbar],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   // Usamos una señal para manejar el estado de la barra lateral.
