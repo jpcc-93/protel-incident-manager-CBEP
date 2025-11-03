@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ProtelApi.Models
 {
@@ -41,8 +42,10 @@ namespace ProtelApi.Models
         public int IdEstadoFactibilidad { get; set; }
 
         // Propiedades de navegación para las relaciones con otras tablas
-        public Cliente Cliente { get; set; }
-        public EstadoFactibilidad EstadoFactibilidad { get; set; }
+        [JsonIgnore]
+        public Cliente? Cliente { get; set; }
+        [JsonIgnore]
+        public EstadoFactibilidad? EstadoFactibilidad { get; set; }
 
         [NotMapped]
         public bool Seleccionado { get; set; }

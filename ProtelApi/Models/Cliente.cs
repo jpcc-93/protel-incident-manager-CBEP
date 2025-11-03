@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ProtelApi.Models
 {
@@ -34,9 +35,8 @@ namespace ProtelApi.Models
         [Column("FECHA_CREACION")]
         public DateTime FechaCreacion { get; set; }
 
-        [Required]
-        [Column("FECHA_ACTUALIZACION")]
-        public DateTime FechaActualizacion { get; set; }
+        [Column("FECHA_ACTUALIZACION")] // Ya no es [Required]
+        public DateTime? FechaActualizacion { get; set; }
 
         [Required]
         [Column("ID_ESTADO_CLIENTE")]
@@ -44,7 +44,8 @@ namespace ProtelApi.Models
         public int IdEstadoCliente { get; set; }
 
         // Propiedades de navegación para las relaciones con otras tablas.
-        public EstadoCliente EstadoCliente { get; set; }
+        [JsonIgnore]
+        public EstadoCliente? EstadoCliente { get; set; }
         public ICollection<Factibilidad> Factibilidades { get; set; } = new List<Factibilidad>();
 
         [NotMapped]
