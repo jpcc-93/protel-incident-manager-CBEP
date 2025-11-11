@@ -84,8 +84,25 @@ namespace ProtelApi.Controllers
         }
 
         // DELETE: api/Factibilidades/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFactibilidad(int id)
+        // [HttpDelete("{id}")] // Comentado para implementar borrado lógico
+        // public async Task<IActionResult> DeleteFactibilidad(int id)
+        // {
+        //     var factibilidad = await _context.Factibilidades.FindAsync(id);
+        //     if (factibilidad == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     _context.Factibilidades.Remove(factibilidad);
+        //     await _context.SaveChangesAsync();
+
+        //     return NoContent();
+        // }
+
+        // PATCH: api/Factibilidades/SoftDelete/5
+        // Implementa el borrado lógico de una factibilidad, cambiando su estado a "Cancelada".
+        [HttpPatch("SoftDelete/{id}")]
+        public async Task<IActionResult> SoftDeleteFactibilidad(int id)
         {
             var factibilidad = await _context.Factibilidades.FindAsync(id);
             if (factibilidad == null)
@@ -93,8 +110,24 @@ namespace ProtelApi.Controllers
                 return NotFound();
             }
 
-            _context.Factibilidades.Remove(factibilidad);
-            await _context.SaveChangesAsync();
+            factibilidad.IdEstadoFactibilidad = 3; // 
+            _context.Entry(factibilidad).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FactibilidadExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
         }
