@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../interfaces/cliente.interface';
 
@@ -11,7 +11,7 @@ import { Cliente } from '../../interfaces/cliente.interface';
   templateUrl: './formulario-cliente.html',
   styleUrls: ['./formulario-cliente.css']
 })
-export class FormularioCliente {
+export class FormularioCliente implements OnInit {
   cliente: Cliente = {
     idCliente: 0,
     nombre: '',
@@ -21,20 +21,40 @@ export class FormularioCliente {
     direccion: '',
     telefono: '',
     email: '',
-    fechaCreacion: new Date(), // Se inicializa con la fecha actual
+    fechaCreacion: new Date(),
     fechaActualizacion: null,
-    idEstadoCliente: 1, // Valor por defecto para el estado del cliente (ej. Activo)
+    idEstadoCliente: 1,
   };
+  isEditMode = false;
 
-  constructor(private clienteService: ClienteService, private router: Router) { }
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditMode = true;
+      this.clienteService.getCliente(+id).subscribe(cliente => {
+        if (cliente) {
+          this.cliente = cliente;
+        }
+      });
+    }
+  }
 
   onSubmit() {
-    // Asignar valores antes de enviar
-    this.cliente.fechaCreacion = new Date();
-    this.cliente.idEstadoCliente = 1; // Asignar un estado por defecto, por ejemplo, 1 para 'Activo'
+    if (this.isEditMode) {
+      this.cliente.fechaActualizacion = new Date();
+    } else {
+      this.cliente.fechaCreacion = new Date();
+      this.cliente.idEstadoCliente = 1; // Asignar estado activo solo al crear
+    }
 
     this.clienteService.guardarCliente(this.cliente).subscribe(() => {
-      this.router.navigate(['/clientes']);
+      this.router.navigate(['/modulo-cliente']); // Corregido para navegar a la lista
     });
   }
 }

@@ -18,7 +18,8 @@ export const routes: Routes = [
 
     // Definiendo las rutas y los componentes asociados
     { path: 'dashboard', component: Dashboard },
-    { path: 'formulario-cliente', component: FormularioCliente },
+    { path: 'formulario-cliente', component: FormularioCliente }, // Para crear un nuevo cliente
+    { path: 'formulario-cliente/:id', component: FormularioCliente }, // Para editar un cliente existente
     { path: 'modulo-cliente', component: ModuloCliente },
     { path: 'factibilidad', component: Factibilidad },
     { path: 'acerca-de', component: AcercaDe },

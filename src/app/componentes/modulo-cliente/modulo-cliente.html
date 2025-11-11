@@ -44,9 +44,9 @@
                 <button (click)="viewClient(client.idCliente)" class="btn btn-sm btn-outline-secondary me-1" title="Ver Detalles">
                   <i class="bi bi-eye-fill"></i>
                 </button>
-                <button (click)="editClient(client.idCliente)" class="btn btn-sm btn-outline-primary me-1" title="Editar">
+                <a [routerLink]="['/formulario-cliente', client.idCliente]" class="btn btn-sm btn-outline-primary me-1" title="Editar">
                   <i class="bi bi-pencil-fill"></i>
-                </button>
+                </a>
                 <button (click)="deleteClient(client.idCliente)" class="btn btn-sm btn-outline-danger" title="Eliminar">
                   <i class="bi bi-trash-fill"></i>
                 </button>
