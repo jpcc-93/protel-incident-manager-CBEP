@@ -11,9 +11,14 @@
 
     <!-- Cuerpo de la tarjeta -->
     <div class="card-body">
-      <!-- Barra de búsqueda (opcional) -->
+      <!-- Barra de búsqueda -->
       <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Buscar cliente por nombre o documento...">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Buscar cliente por nombre o documento..."
+          [(ngModel)]="searchTerm"
+          (input)="onSearch()">
       </div>
 
       <!-- Tabla de Clientes -->
@@ -29,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let client of clients">
+            <tr *ngFor="let client of filteredClients">
               <td>{{ client.nombre }}</td>
               <td>{{ client.documento }}</td>
               <td>{{ client.telefono }}</td>

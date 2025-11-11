@@ -5,6 +5,7 @@ import { Dashboard } from './componentes/dashboard/dashboard';
 import { FormularioCliente } from './componentes/formulario-cliente/formulario-cliente';
 import { Factibilidad } from './componentes/factibilidad/factibilidad';
 import { AcercaDe } from './componentes/acerca-de/acerca-de';
+import { ModuloCliente } from './componentes/modulo-cliente/modulo-cliente';
 
 // Definiendo las rutas
 
@@ -18,6 +19,7 @@ export const routes: Routes = [
     // Definiendo las rutas y los componentes asociados
     { path: 'dashboard', component: Dashboard },
     { path: 'formulario-cliente', component: FormularioCliente },
+    { path: 'modulo-cliente', component: ModuloCliente },
     { path: 'factibilidad', component: Factibilidad },
     { path: 'acerca-de', component: AcercaDe },
 ];
