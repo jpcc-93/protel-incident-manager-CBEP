@@ -30,19 +30,19 @@
           </thead>
           <tbody>
             <tr *ngFor="let client of clients">
-              <td>{{ client.name }}</td>
-              <td>{{ client.document }}</td>
-              <td>{{ client.phone }}</td>
+              <td>{{ client.nombre }}</td>
+              <td>{{ client.documento }}</td>
+              <td>{{ client.telefono }}</td>
               <td>{{ client.email }}</td>
               <td class="text-center">
                 <!-- Botones de acciones -->
-                <button (click)="viewClient(client.id)" class="btn btn-sm btn-outline-secondary me-1" title="Ver Detalles">
+                <button (click)="viewClient(client.idCliente)" class="btn btn-sm btn-outline-secondary me-1" title="Ver Detalles">
                   <i class="bi bi-eye-fill"></i>
                 </button>
-                <button (click)="editClient(client.id)" class="btn btn-sm btn-outline-primary me-1" title="Editar">
+                <button (click)="editClient(client.idCliente)" class="btn btn-sm btn-outline-primary me-1" title="Editar">
                   <i class="bi bi-pencil-fill"></i>
                 </button>
-                <button (click)="deleteClient(client.id)" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                <button (click)="deleteClient(client.idCliente)" class="btn btn-sm btn-outline-danger" title="Eliminar">
                   <i class="bi bi-trash-fill"></i>
                 </button>
               </td>
