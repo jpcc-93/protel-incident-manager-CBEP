@@ -17,33 +17,19 @@ namespace ProtelApi.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configuración de las relaciones entre entidades
-
-            // Cliente tiene un EstadoCliente (uno a muchos)
             modelBuilder.Entity<Cliente>()
-                .HasOne(c => c.EstadoCliente)
-                .WithMany(e => e.Clientes)
-                .HasForeignKey(c => c.IdEstadoCliente);
+                .HasIndex(c => c.Documento)
+                .IsUnique();
 
-            // Factibilidad pertenece a un Cliente (uno a muchos)
             modelBuilder.Entity<Factibilidad>()
                 .HasOne(f => f.Cliente)
                 .WithMany(c => c.Factibilidades)
-                .HasForeignKey(f => f.IdCliente)
-                .IsRequired();
+                .HasForeignKey(f => f.IdCliente);
 
-            // Factibilidad tiene un EstadoFactibilidad (uno a muchos)
             modelBuilder.Entity<Factibilidad>()
                 .HasOne(f => f.EstadoFactibilidad)
                 .WithMany(e => e.Factibilidades)
-                .HasForeignKey(f => f.IdEstadoFactibilidad)
-                .IsRequired();
-
-            // Opcional: Puedes añadir datos iniciales (seed data) aquí si lo deseas
-            // modelBuilder.Entity<EstadoCliente>().HasData(
-            //     new EstadoCliente { IdEstadoCliente = 1, Nombre = "Activo" },
-            //     new EstadoCliente { IdEstadoCliente = 2, Nombre = "Inactivo" }
-            // );
+                .HasForeignKey(f => f.IdEstadoFactibilidad);
         }
     }
 }

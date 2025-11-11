@@ -17,6 +17,20 @@ namespace ProtelApi.Models
         public string Nombre { get; set; }
 
         [Required]
+        [StringLength(50)]
+        [Column("DOCUMENTO")]
+        public string Documento { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Column("TIPO_CLIENTE")]
+        public string TipoCliente { get; set; }
+
+        [StringLength(200)]
+        [Column("PERSONA_CONTACTO")]
+        public string PersonaContacto { get; set; }
+
+        [Required]
         [StringLength(300)]
         [Column("DIRECCION")]
         public string Direccion { get; set; }

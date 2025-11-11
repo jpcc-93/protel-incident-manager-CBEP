@@ -74,8 +74,26 @@ namespace ProtelApi.Controllers
         }
 
         // DELETE: api/Clientes/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCliente(int id)
+        // [HttpDelete("{id}")] // Comentado para implementar borrado lógico
+        // public async Task<IActionResult> DeleteCliente(int id)
+        // {
+        //     var cliente = await _context.Clientes.FindAsync(id);
+        //     if (cliente == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     _context.Clientes.Remove(cliente);
+        //     await _context.SaveChangesAsync();
+
+        //     return NoContent();
+        // }
+
+        // PATCH: api/Clientes/SoftDelete/5
+        // Implementa el borrado lógico de un cliente, cambiando su estado a inactivo (IdEstadoCliente = 2).
+        // Se mantiene el método HttpDelete original comentado por integridad y referencia.
+        [HttpPatch("SoftDelete/{id}")]
+        public async Task<IActionResult> SoftDeleteCliente(int id)
         {
             var cliente = await _context.Clientes.FindAsync(id);
             if (cliente == null)
@@ -83,11 +101,27 @@ namespace ProtelApi.Controllers
                 return NotFound();
             }
 
-            _context.Clientes.Remove(cliente);
-            await _context.SaveChangesAsync();
+            cliente.IdEstadoCliente = 2; 
+            _context.Entry(cliente).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ClienteExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
-       }
+        }
 
         private bool ClienteExists(int id)
         {
