@@ -4,45 +4,33 @@
       <h5 class="m-0">Nuevo Estudio de Factibilidad</h5>
     </div>
     <div class="card-body">
-      <!-- El atributo novalidate previene la validación HTML5 por defecto -->
       <form (ngSubmit)="onSubmit()" #factibilidadForm="ngForm" novalidate>
         
         <!-- Nombre del Proyecto -->
         <div class="mb-3">
-          <label for="projectName" class="form-label">Nombre del Proyecto</label>
-          <input type="text" class="form-control" id="projectName" name="projectName" [(ngModel)]="studyData.projectName" required>
+          <label for="nombreProyecto" class="form-label">Nombre del Proyecto</label>
+          <input type="text" class="form-control" id="nombreProyecto" name="nombreProyecto" [(ngModel)]="factibilidad.nombreProyecto" required>
         </div>
 
         <!-- Cliente (Dropdown) -->
         <div class="mb-3">
-          <label for="client" class="form-label">Cliente Asociado</label>
-          <select class="form-select" id="client" name="client" [(ngModel)]="studyData.client" required>
-            <option value="" disabled>Selecciona un cliente...</option>
-            <option *ngFor="let client of clients" [value]="client">{{ client }}</option>
+          <label for="cliente" class="form-label">Cliente Asociado</label>
+          <select class="form-select" id="cliente" name="cliente" [(ngModel)]="factibilidad.idCliente" required>
+            <option value="0" disabled>Selecciona un cliente...</option>
+            <option *ngFor="let client of clients" [value]="client.idCliente">{{ client.nombre }}</option>
           </select>
         </div>
 
-        <!-- Dirección -->
+        <!-- Ubicación -->
         <div class="mb-3">
-          <label for="address" class="form-label">Dirección o Ubicación</label>
-          <input type="text" class="form-control" id="address" name="address" [(ngModel)]="studyData.address">
+          <label for="ubicacion" class="form-label">Dirección o Ubicación</label>
+          <input type="text" class="form-control" id="ubicacion" name="ubicacion" [(ngModel)]="factibilidad.ubicacion">
         </div>
 
-        <!-- Tipo de Servicio -->
+        <!-- Descripción / Notas -->
         <div class="mb-3">
-          <label for="serviceType" class="form-label">Tipo de Servicio</label>
-          <select class="form-select" id="serviceType" name="serviceType" [(ngModel)]="studyData.serviceType">
-            <option>Fibra Óptica</option>
-            <option>Radioenlace</option>
-            <option>Conectividad Satelital</option>
-            <option>Otro</option>
-          </select>
-        </div>
-
-        <!-- Notas Técnicas -->
-        <div class="mb-3">
-          <label for="technicalNotes" class="form-label">Notas Técnicas</label>
-          <textarea class="form-control" id="technicalNotes" name="technicalNotes" rows="4" [(ngModel)]="studyData.technicalNotes"></textarea>
+          <label for="descripcion" class="form-label">Descripción / Notas</label>
+          <textarea class="form-control" id="descripcion" name="descripcion" rows="4" [(ngModel)]="factibilidad.descripcion"></textarea>
         </div>
 
         <!-- Botón de Envío -->
