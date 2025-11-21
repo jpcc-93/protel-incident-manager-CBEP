@@ -20,6 +20,16 @@ export class FactibilidadService {
   }
 
   /**
+   * Busca factibilidades activas por un término específico (ej: nombre de proyecto).
+   * Si el término es vacío, devuelve todas las factibilidades activas.
+   * @param term El término de búsqueda.
+   * @returns Un Observable con un arreglo de factibilidades.
+   */
+  searchFactibilidades(term: string): Observable<Factibilidad[]> {
+    return this.http.get<Factibilidad[]>(`${this.apiUrl}/search?term=${term}`);
+  }
+
+  /**
    * Obtiene un estudio de factibilidad específico por su ID.
    * @param id El ID de la factibilidad.
    * @returns Un Observable con la factibilidad encontrada.
@@ -43,11 +53,11 @@ export class FactibilidadService {
   }
 
   /**
-   * Realiza un borrado lógico de un estudio de factibilidad, cambiándolo a un estado "Cancelado".
-   * @param id El ID de la factibilidad a cancelar.
+   * Realiza un borrado lógico de un estudio de factibilidad (Soft Delete).
+   * @param id El ID de la factibilidad a eliminar lógicamente.
    * @returns Un Observable que se completa cuando la operación termina.
    */
-  cancelarFactibilidad(id: number): Observable<any> {
+  eliminarFactibilidad(id: number): Observable<any> {
     return this.http.patch(`${this.apiUrl}/SoftDelete/${id}`, null);
   }
 }

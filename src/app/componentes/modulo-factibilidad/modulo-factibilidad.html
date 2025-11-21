@@ -1,0 +1,66 @@
+<div class="container-fluid p-4">
+  <div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="m-0">Consulta de Factibilidades</h5>
+      <!-- Este botón ahora apunta al componente de formulario existente -->
+      <a routerLink="/factibilidad" class="btn btn-primary-custom">
+        <i class="bi bi-plus-circle me-2"></i>
+        Nueva Factibilidad
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="input-group mb-3">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Buscar por proyecto, cliente, estado..."
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()">
+        <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">
+          <i class="bi bi-search"></i> Buscar
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre del Proyecto</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha de Solicitud</th>
+              <th scope="col">Estado</th>
+              <th scope="col" class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let factibilidad of filteredFactibilidades">
+              <td>{{ factibilidad.idFactibilidad }}</td>
+              <td>{{ factibilidad.nombreProyecto }}</td>
+              <!-- Lógica de negocio: Mostrar nombre en lugar de ID -->
+              <td>{{ factibilidad.cliente?.nombre || factibilidad.idCliente }}</td>
+              <td>{{ factibilidad.fechaSolicitud | date:'shortDate' }}</td>
+              <!-- Lógica de negocio: Mostrar nombre en lugar de ID -->
+              <td>{{ factibilidad.estadoFactibilidad?.nombre || factibilidad.idEstadoFactibilidad }}</td>
+              <td class="text-center">
+                <button (click)="viewFactibilidad(factibilidad.idFactibilidad)" class="btn btn-sm btn-outline-secondary me-1" title="Ver Detalles">
+                  <i class="bi bi-eye-fill"></i>
+                </button>
+                <button (click)="editFactibilidad(factibilidad.idFactibilidad)" class="btn btn-sm btn-outline-primary me-1" title="Editar">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+                <button (click)="deleteFactibilidad(factibilidad.idFactibilidad)" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="filteredFactibilidades.length === 0">
+              <td colspan="6" class="text-center">No se encontraron registros.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
