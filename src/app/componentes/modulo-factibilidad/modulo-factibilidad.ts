@@ -57,4 +57,22 @@ export class ModuloFactibilidadComponent implements OnInit {
       this.filteredFactibilidades = this.filteredFactibilidades.filter(f => f.idFactibilidad !== id);
     });
   }
+
+  getStatusClass(statusName: string | undefined): string {
+    if (!statusName) {
+      return 'status-desconocido';
+    }
+    switch (statusName.toLowerCase()) {
+      case 'pendiente':
+        return 'status-pendiente';
+      case 'aprobado':
+        return 'status-aprobado';
+      case 'rechazado':
+        return 'status-rechazado';
+      case 'cancelado':
+        return 'status-cancelado';
+      default:
+        return 'status-desconocido';
+    }
+  }
 }

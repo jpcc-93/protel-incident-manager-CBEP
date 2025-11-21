@@ -47,4 +47,18 @@ export class ClienteDetalleComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/clientes']);
   }
+
+  getStatusClass(statusName: string | undefined): string {
+    if (!statusName) {
+      return 'status-desconocido';
+    }
+    switch (statusName.toLowerCase()) {
+      case 'activo':
+        return 'status-aprobado'; // Reutilizamos la clase verde
+      case 'inactivo':
+        return 'status-cancelado'; // Reutilizamos la clase gris
+      default:
+        return 'status-desconocido';
+    }
+  }
 }

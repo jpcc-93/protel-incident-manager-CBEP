@@ -37,6 +37,7 @@
               <th scope="col">Documento</th>
               <th scope="col">Teléfono</th>
               <th scope="col">Correo Electrónico</th>
+              <!-- <th scope="col">Estado</th> -->
               <th scope="col" class="text-center">Acciones</th>
             </tr>
           </thead>
@@ -47,6 +48,12 @@
               <td>{{ client.documento }}</td>
               <td>{{ client.telefono }}</td>
               <td>{{ client.email }}</td>
+             <!-- <td>
+                <span class="status-badge" [ngClass]="getStatusClass(client.estadoCliente?.nombre)">
+                  {{ client.estadoCliente?.nombre || 'Desconocido' }}
+                </span>
+              </td>-->
+
               <td class="text-center">
                 <!-- Botones de acciones -->
                 <button (click)="viewClient(client.idCliente)" class="btn btn-sm btn-outline-secondary me-1" title="Ver Detalles">

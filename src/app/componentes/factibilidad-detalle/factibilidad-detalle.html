@@ -39,7 +39,11 @@
         
         <div class="detail-item">
           <strong>Estado:</strong>
-          <p>{{ factibilidad.estadoFactibilidad?.nombre || 'N/A' }}</p>
+          <p>
+            <span class="status-badge" [ngClass]="getStatusClass(factibilidad.estadoFactibilidad?.nombre)">
+              {{ factibilidad.estadoFactibilidad?.nombre || 'Desconocido' }}
+            </span>
+          </p>
         </div>
 
         <div class="detail-item full-width">

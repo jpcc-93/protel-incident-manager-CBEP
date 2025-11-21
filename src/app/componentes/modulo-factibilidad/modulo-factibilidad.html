@@ -41,8 +41,12 @@
               <!-- Lógica de negocio: Mostrar nombre en lugar de ID -->
               <td>{{ factibilidad.cliente?.nombre || factibilidad.idCliente }}</td>
               <td>{{ factibilidad.fechaSolicitud | date:'shortDate' }}</td>
-              <!-- Lógica de negocio: Mostrar nombre en lugar de ID -->
-              <td>{{ factibilidad.estadoFactibilidad?.nombre || factibilidad.idEstadoFactibilidad }}</td>
+              <!-- Lógica de negocio: Mostrar nombre en lugar de ID y aplicar estilo -->
+              <td>
+                <span class="status-badge" [ngClass]="getStatusClass(factibilidad.estadoFactibilidad?.nombre)">
+                  {{ factibilidad.estadoFactibilidad?.nombre || 'Desconocido' }}
+                </span>
+              </td>
               <td class="text-center">
                 <button (click)="viewFactibilidad(factibilidad.idFactibilidad)" class="btn btn-sm btn-outline-secondary me-1" title="Ver Detalles">
                   <i class="bi bi-eye-fill"></i>

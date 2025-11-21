@@ -45,4 +45,22 @@ export class FactibilidadDetalleComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/factibilidades']);
   }
+
+  getStatusClass(statusName: string | undefined): string {
+    if (!statusName) {
+      return 'status-desconocido';
+    }
+    switch (statusName.toLowerCase()) {
+      case 'pendiente':
+        return 'status-pendiente';
+      case 'aprobado':
+        return 'status-aprobado';
+      case 'rechazado':
+        return 'status-rechazado';
+      case 'cancelado':
+        return 'status-cancelado';
+      default:
+        return 'status-desconocido';
+    }
+  }
 }

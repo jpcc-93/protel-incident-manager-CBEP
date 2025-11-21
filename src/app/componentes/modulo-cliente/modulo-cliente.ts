@@ -63,4 +63,18 @@ export class ModuloCliente implements OnInit {
       this.filteredClients = this.filteredClients.filter(c => c.idCliente !== id);
     });
   }
+
+  getStatusClass(statusName: string | undefined): string {
+    if (!statusName) {
+      return 'status-desconocido';
+    }
+    switch (statusName.toLowerCase()) {
+      case 'activo':
+        return 'status-aprobado'; // Reutilizamos la clase verde
+      case 'inactivo':
+        return 'status-cancelado'; // Reutilizamos la clase gris
+      default:
+        return 'status-desconocido';
+    }
+  }
 }
