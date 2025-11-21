@@ -47,7 +47,7 @@
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* Espacio entre el título y los íconos */
+  gap: auto; /* Espacio entre el título y los íconos */
 }
 
 .topbar-title {

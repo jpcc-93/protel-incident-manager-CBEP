@@ -62,17 +62,27 @@
           <h6 class="m-0 fw-bold">Distribución de Estudios por Estado</h6>
         </div>
         <div class="card-body">
-          <p class="text-center text-muted p-5">Aquí iría el Gráfico 1</p>
+          <canvas *ngIf="isBrowser" baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [labels]="barChartLabels"
+            type="bar">
+          </canvas>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
        <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 fw-bold">Gráfico 2</h6>
+          <h6 class="m-0 fw-bold">Distribución por Estados</h6>
         </div>
         <div class="card-body">
-          <p class="text-center text-muted p-5">Aquí iría el Gráfico 2</p>
+          <canvas *ngIf="isBrowser" baseChart
+            [data]="doughnutChartData"
+            [options]="doughnutChartOptions"
+            [labels]="doughnutChartLabels"
+            type="doughnut">
+          </canvas>
         </div>
       </div>
     </div>

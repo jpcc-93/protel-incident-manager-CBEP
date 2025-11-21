@@ -1,28 +1,20 @@
-<!-- 
-  topbar.html: Define la estructura de la barra de navegación superior.
--->
 <nav class="topbar">
-
-  <!-- Botón para abrir/cerrar el menú lateral.
-       (click)="onMenuClick()" llama a la función en topbar.ts que emite el evento hacia el padre.
-  -->
+  <!-- Botón menú -->
   <button class="menu-toggle-btn" (click)="onMenuClick()">
     <i class="bi bi-list"></i>
   </button>
 
-  <!-- Contenedor para los elementos del lado derecho -->
+  <!-- Título -->
+  <span class="topbar-title">PROTEL</span>
+
+  <!-- Iconos a la derecha -->
   <div class="topbar-right">
-    
-    <!-- Título de la aplicación -->
-    <span class="topbar-title">PROTEL</span>
-    
-    <!-- Iconos de la derecha (ej. notificaciones, perfil) -->
     <a href="#" class="topbar-icon">
       <i class="bi bi-three-dots-vertical"></i>
     </a>
     <a href="#" class="topbar-icon">
       <i class="bi bi-person"></i>
     </a>
-
   </div>
 </nav>
+
