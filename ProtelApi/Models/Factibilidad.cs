@@ -42,9 +42,7 @@ namespace ProtelApi.Models
         public int IdEstadoFactibilidad { get; set; }
 
         // Propiedades de navegación para las relaciones con otras tablas
-        [JsonIgnore]
         public Cliente? Cliente { get; set; }
-        [JsonIgnore]
         public EstadoFactibilidad? EstadoFactibilidad { get; set; }
 
         [NotMapped]

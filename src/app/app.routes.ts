@@ -8,6 +8,7 @@ import { AcercaDe } from './componentes/acerca-de/acerca-de';
 import { ModuloCliente } from './componentes/modulo-cliente/modulo-cliente';
 import { ClienteDetalleComponent } from './componentes/cliente-detalle/cliente-detalle';
 import { ModuloFactibilidadComponent } from './componentes/modulo-factibilidad/modulo-factibilidad';
+import { FactibilidadDetalleComponent } from './componentes/factibilidad-detalle/factibilidad-detalle';
 
 // Definiendo las rutas
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
     { path: 'factibilidades', component: ModuloFactibilidadComponent }, // La nueva lista de consulta
     { path: 'factibilidad', component: Factibilidad }, // El formulario para crear
     { path: 'factibilidad/:id', component: Factibilidad }, // El formulario para editar
+    { path: 'factibilidad-detalle/:id', component: FactibilidadDetalleComponent }, // La nueva vista de detalles
 
     { path: 'acerca-de', component: AcercaDe },
 ];

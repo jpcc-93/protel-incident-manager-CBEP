@@ -131,7 +131,7 @@ namespace ProtelApi.Controllers
                 return NotFound();
             }
 
-            factibilidad.IdEstadoFactibilidad = 3; // 
+            factibilidad.IdEstadoFactibilidad = 4; // Estado "Cancelado"
             _context.Entry(factibilidad).State = EntityState.Modified;
 
             try

@@ -1,0 +1,68 @@
+<div class="container-fluid p-4">
+  <div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="m-0">Detalles de Factibilidad</h5>
+      <button (click)="goBack()" class="btn btn-secondary">
+        <i class="bi bi-arrow-left me-2"></i>
+        Volver a la Lista
+      </button>
+    </div>
+
+    <div class="card-body">
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p>Cargando detalles...</p>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="factibilidad && !isLoading" class="details-grid">
+        
+        <div class="detail-item">
+          <strong>ID Factibilidad:</strong>
+          <p>{{ factibilidad.idFactibilidad }}</p>
+        </div>
+
+        <div class="detail-item">
+          <strong>Nombre del Proyecto:</strong>
+          <p>{{ factibilidad.nombreProyecto }}</p>
+        </div>
+
+        <div class="detail-item">
+          <strong>Cliente:</strong>
+          <p>{{ factibilidad.cliente?.nombre || 'N/A' }}</p>
+        </div>
+        
+        <div class="detail-item">
+          <strong>Estado:</strong>
+          <p>{{ factibilidad.estadoFactibilidad?.nombre || 'N/A' }}</p>
+        </div>
+
+        <div class="detail-item full-width">
+          <strong>Ubicación:</strong>
+          <p>{{ factibilidad.ubicacion }}</p>
+        </div>
+        
+        <div class="detail-item full-width">
+          <strong>Descripción:</strong>
+          <p>{{ factibilidad.descripcion || 'Sin descripción.' }}</p>
+        </div>
+
+        <div class="detail-item">
+          <strong>Fecha de Solicitud:</strong>
+          <p>{{ factibilidad.fechaSolicitud | date:'fullDate' }}</p>
+        </div>
+        
+        <div class="detail-item">
+          <strong>Fecha de Respuesta:</strong>
+          <p>{{ factibilidad.fechaRespuesta ? (factibilidad.fechaRespuesta | date:'fullDate') : 'Pendiente' }}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

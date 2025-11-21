@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; // Importar ActivatedRoute
 import { FactibilidadService } from '../../services/factibilidad.service';
 import { ClienteService } from '../../services/cliente.service';
 import { Factibilidad as IFactibilidad } from '../../interfaces/factibilidad.interface';
@@ -20,34 +20,49 @@ export class Factibilidad implements OnInit {
     idFactibilidad: 0,
     nombreProyecto: '',
     idCliente: 0,
-    ubicacion: '', // Corregido de 'direccion' a 'ubicacion'
-    descripcion: '', // Corregido de 'notas' a 'descripcion'
-    fechaSolicitud: new Date(), // Corregido de 'fechaCreacion'
-    idEstadoFactibilidad: 1, // Por defecto: 'Nuevo' o 'Pendiente'
+    ubicacion: '',
+    descripcion: '',
+    fechaSolicitud: new Date(),
+    idEstadoFactibilidad: 1, // Por defecto: 'Pendiente'
   };
 
   clients: Cliente[] = [];
+  isEditMode: boolean = false;
 
   constructor(
     private factibilidadService: FactibilidadService,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute // Inyectar ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.loadClients();
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditMode = true;
+      this.factibilidadService.getFactibilidad(+id).subscribe(data => {
+        this.factibilidad = data;
+      });
+    }
+  }
+
+  loadClients(): void {
     this.clienteService.getClientes().subscribe(data => {
-      // Filtramos para mostrar solo clientes activos
       this.clients = data.filter(cliente => cliente.idEstadoCliente === 1);
     });
   }
 
   onSubmit() {
-    this.factibilidad.fechaSolicitud = new Date();
-    this.factibilidad.idEstadoFactibilidad = 1; // Asignar estado inicial
+    // Si no estamos en modo edición, es un nuevo registro con valores por defecto
+    if (!this.isEditMode) {
+      this.factibilidad.fechaSolicitud = new Date();
+      this.factibilidad.idEstadoFactibilidad = 1; // Asignar estado inicial "Pendiente"
+    }
 
     this.factibilidadService.guardarFactibilidad(this.factibilidad).subscribe(() => {
-      // Navegar a una futura lista de factibilidades o al dashboard
-      this.router.navigate(['/dashboard']); 
+      // Navegar a la lista de factibilidades
+      this.router.navigate(['/factibilidades']); 
     });
   }
 }
