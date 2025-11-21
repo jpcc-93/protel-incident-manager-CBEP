@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../interfaces/cliente.interface';
@@ -14,47 +14,52 @@ import { Cliente } from '../../interfaces/cliente.interface';
 })
 export class ModuloCliente implements OnInit {
 
-  clients: Cliente[] = []; // Lista original sin filtrar
   filteredClients: Cliente[] = []; // Lista para mostrar en la tabla
   searchTerm: string = ''; // Término de búsqueda
 
-  constructor(private clienteService: ClienteService) { }
+  constructor(private clienteService: ClienteService, private router: Router) { }
 
   ngOnInit(): void {
-    this.clienteService.getClientes().subscribe(data => {
-      this.clients = data.filter(c => c.idEstadoCliente === 1); // Mostrar solo activos
-      this.filteredClients = this.clients;
+    this.clienteService.getClientes().subscribe({
+      next: data => {
+        console.log('ngOnInit: getClientes ->', data);
+        this.filteredClients = data;
+      },
+      error: err => {
+        console.error('ngOnInit: error getClientes ->', err);
+      }
     });
   }
 
   onSearch(): void {
-    const term = this.searchTerm.toLowerCase();
-    if (!term) {
-      this.filteredClients = this.clients;
-    } else {
-      this.filteredClients = this.clients.filter(client =>
-        client.nombre.toLowerCase().includes(term) ||
-        client.documento.toLowerCase().includes(term)
-      );
-    }
+    // Siempre llamamos a searchClientes. El servicio se encarga de devolver
+    // los clientes activos si el término de búsqueda es vacío.
+    const term = this.searchTerm ? this.searchTerm.trim() : '';
+    console.log('onSearch: termino ->', JSON.stringify(term));
+    this.clienteService.searchClientes(term).subscribe({
+      next: data => {
+        console.log('onSearch: resultado ->', data);
+        this.filteredClients = data;
+      },
+      error: err => {
+        console.error('onSearch: error ->', err);
+      }
+    });
   }
 
   // Métodos para las acciones
   viewClient(id: number) {
-    console.log(`Ver detalles del cliente con ID: ${id}`);
-    // Lógica para ver detalles
+    this.router.navigate(['/clientes', id]);
   }
 
   editClient(id: number) {
-    console.log(`Editar cliente con ID: ${id}`);
-    // Lógica para editar
+    this.router.navigate(['/formulario-cliente', id]);
   }
 
   deleteClient(id: number) {
     console.log(`Eliminar cliente con ID: ${id}`);
     this.clienteService.eliminarCliente(id).subscribe(() => {
-      // Actualizar ambas listas después de eliminar
-      this.clients = this.clients.filter(c => c.idCliente !== id);
+      // Actualizar la lista después de eliminar
       this.filteredClients = this.filteredClients.filter(c => c.idCliente !== id);
     });
   }

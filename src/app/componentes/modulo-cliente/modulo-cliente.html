@@ -3,7 +3,7 @@
     <!-- Encabezado de la tarjeta -->
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="m-0">Consulta de Clientes</h5>
-      <a routerLink="/clientes/nuevo" class="btn btn-primary-custom">
+      <a routerLink="/formulario-cliente" class="btn btn-primary-custom">
         <i class="bi bi-plus-circle me-2"></i>
         Nuevo Cliente
       </a>
@@ -20,12 +20,19 @@
           [(ngModel)]="searchTerm"
           (input)="onSearch()">
       </div>
+      <!-- boton buscar -->
+      <div class="mb-3 text-end">
+        <a class="btn btn-primary-custom" (click)="onSearch()">
+          <i class="bi bi-search me-2"></i>
+          Buscar
+        </a>
 
       <!-- Tabla de Clientes -->
       <div class="table-responsive">
         <table class="table table-hover align-middle">
           <thead class="table-light">
             <tr>
+              <th scope="col">id</th>
               <th scope="col">Nombre</th>
               <th scope="col">Documento</th>
               <th scope="col">Teléfono</th>
@@ -35,6 +42,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let client of filteredClients">
+              <td>{{ client.idCliente }}</td>
               <td>{{ client.nombre }}</td>
               <td>{{ client.documento }}</td>
               <td>{{ client.telefono }}</td>

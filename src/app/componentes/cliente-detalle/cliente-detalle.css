@@ -1,0 +1,36 @@
+/* Estilos para la página de detalles del cliente */
+
+.container-fluid {
+  background-color: #f8f9fc;
+}
+
+.card {
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e3e6f0;
+  padding: 1rem 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}

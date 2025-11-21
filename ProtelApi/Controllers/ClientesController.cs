@@ -22,6 +22,29 @@ namespace ProtelApi.Controllers
                 return await _context.Clientes.ToListAsync();
             }
 
+        // GET: api/Clientes/search?term=...
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Cliente>>> SearchClientes([FromQuery] string? term)
+        {
+            if (string.IsNullOrEmpty(term))
+            {
+                // Si no hay término de búsqueda, devuelve solo los clientes activos.
+                return await _context.Clientes
+                                     .Where(c => c.IdEstadoCliente == 1)
+                                     .ToListAsync();
+            }
+
+            var lowerCaseTerm = term.ToLower();
+
+            var clientes = await _context.Clientes
+                                         .Where(c => c.IdEstadoCliente == 1 &&
+                                                     (c.Nombre.ToLower().Contains(lowerCaseTerm) ||
+                                                      c.Documento.ToLower().Contains(lowerCaseTerm)))
+                                         .ToListAsync();
+
+            return clientes;
+        }
+
         // GET: api/Clientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)

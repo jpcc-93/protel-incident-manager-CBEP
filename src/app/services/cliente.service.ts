@@ -11,8 +11,28 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  getClientes(): Observable<Cliente[]> {
+  // Obtiene TODOS los clientes (activos e inactivos)
+  getAllClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl);
+  }
+
+  // Obtiene solo los clientes ACTIVOS para la vista inicial
+  getClientes(): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>(`${this.apiUrl}/search`);
+  }
+
+  // Busca clientes activos por un término específico
+  searchClientes(term: string): Observable<Cliente[]> {
+    // Si el término está vacío o solo espacios, devolvemos la lista por defecto
+    // que consulta a `${apiUrl}/search` (clientes activos).
+    const t = term ? term.trim() : '';
+    if (!t) {
+      return this.getClientes();
+    }
+
+    // Codificar el término para evitar problemas con caracteres especiales
+    const encoded = encodeURIComponent(t);
+    return this.http.get<Cliente[]>(`${this.apiUrl}/search?term=${encoded}`);
   }
 
   getCliente(id: number): Observable<Cliente> {

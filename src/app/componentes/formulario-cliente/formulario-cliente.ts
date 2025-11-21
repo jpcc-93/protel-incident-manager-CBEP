@@ -54,7 +54,11 @@ export class FormularioCliente implements OnInit {
     }
 
     this.clienteService.guardarCliente(this.cliente).subscribe(() => {
-      this.router.navigate(['/modulo-cliente']); // Corregido para navegar a la lista
+      this.router.navigate(['/clientes']); // Navegar a la lista de clientes
     });
+  }
+
+  onCancel(): void {
+    this.router.navigate(['/clientes']); // Navegar de vuelta a la lista de clientes
   }
 }

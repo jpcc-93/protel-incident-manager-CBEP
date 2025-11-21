@@ -44,6 +44,8 @@ Thumbs.db
 
 # private files of gemini
 GEMINI.md
+ARQUITECTURA_Y_DATOS.md
+EXPLICACION_VISTA_DETALLE.md
 
 # Reference .NET project
 /protel-app-ref/
