@@ -26,6 +26,27 @@ namespace ProtelApi.Controllers
                                  .ToListAsync();
         }
 
+        // GET: api/Factibilidades/search?term=...
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Factibilidad>>> SearchFactibilidades([FromQuery] string? term)
+        {
+            var query = _context.Factibilidades
+                                .Include(f => f.Cliente)
+                                .Include(f => f.EstadoFactibilidad)
+                                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                query = query.Where(f =>
+                    f.NombreProyecto.Contains(term) ||
+                    (f.Cliente != null && f.Cliente.Nombre.Contains(term)) ||
+                    (f.EstadoFactibilidad != null && f.EstadoFactibilidad.Nombre.Contains(term))
+                );
+            }
+
+            return await query.ToListAsync();
+        }
+
         // GET: api/Factibilidades/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Factibilidad>> GetFactibilidad(int id)
