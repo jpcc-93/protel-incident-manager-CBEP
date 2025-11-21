@@ -2,14 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Factibilidad } from '../interfaces/factibilidad.interface';
+import { EstadoFactibilidad } from '../interfaces/estado-factibilidad.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FactibilidadService {
   private apiUrl = 'http://localhost:5194/api/factibilidades'; // URL base de la API
+  private apiEstadoUrl = 'http://localhost:5194/api/EstadoFactibilidad'; // URL para los estados
 
   constructor(private http: HttpClient) { }
+
+  /**
+   * Obtiene la lista de todos los posibles estados de factibilidad.
+   * @returns Un Observable con un arreglo de estados de factibilidad.
+   */
+  getEstadosFactibilidad(): Observable<EstadoFactibilidad[]> {
+    return this.http.get<EstadoFactibilidad[]>(this.apiEstadoUrl);
+  }
 
   /**
    * Obtiene todos los estudios de factibilidad.

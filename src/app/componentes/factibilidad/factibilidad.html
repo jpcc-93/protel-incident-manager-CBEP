@@ -21,6 +21,16 @@
           </select>
         </div>
 
+        <!-- Estado de Factibilidad (Solo en modo edición) -->
+        <div class="mb-3" *ngIf="isEditMode">
+          <label for="estadoFactibilidad" class="form-label">Estado del Estudio</label>
+          <select class="form-select" id="estadoFactibilidad" name="estadoFactibilidad" [(ngModel)]="factibilidad.idEstadoFactibilidad">
+            <option *ngFor="let estado of estadosFactibilidad$ | async" [value]="estado.idEstadoFactibilidad">
+              {{ estado.nombre }}
+            </option>
+          </select>
+        </div>
+
         <!-- Ubicación -->
         <div class="mb-3">
           <label for="ubicacion" class="form-label">Dirección o Ubicación</label>

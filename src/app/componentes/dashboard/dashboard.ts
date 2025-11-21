@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClienteService } from '../../services/cliente.service';
+import { FactibilidadService } from '../../services/factibilidad.service';
+import { Cliente } from '../../interfaces/cliente.interface';
+import { Factibilidad as IFactibilidad } from '../../interfaces/factibilidad.interface';
+import { EstadoFactibilidad } from '../../interfaces/estado-factibilidad.interface';
+import { combineLatest } from 'rxjs'; // Import combineLatest
 
 @Component({
   selector: 'app-dashboard',
@@ -8,34 +14,71 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
-export class Dashboard {
-summaryCards = [
+export class Dashboard implements OnInit {
+
+  totalClients: number = 0;
+  activeStudies: number = 0;
+  totalStudies: number = 0;
+  recentStudiesList: IFactibilidad[] = [];
+  estadosFactibilidad: EstadoFactibilidad[] = []; // Para mapear los IDs a nombres
+
+  summaryCards = [
     {
       title: 'Clientes Registrados',
-      value: 5,
+      value: 0,
       icon: 'bi bi-people-fill',
       color: '#6236CB' // Morado
     },
     {
       title: 'Estudios Activos',
-      value: 2,
+      value: 0,
       icon: 'bi bi-file-earmark-text-fill',
       color: '#E91E63' // Rosa
     },
     {
       title: 'Estudios Totales',
-      value: 4,
+      value: 0,
       icon: 'bi bi-check-circle-fill',
       color: '#4CAF50' // Verde
     }
   ];
 
-  // Tabla de estudios recientes
-  recentStudies = [
-    { name: 'Fibra Óptica Zona Industrial', client: 'Cliente B', status: 'Activo', date: '20/04/2025' },
-    { name: 'Conexión Rural Vereda Y', client: 'Cliente C', status: 'Completado', date: '15/03/2025' },
-    { name: 'Proyecto Conectividad Alcaldía Z', client: 'Municipio X', status: 'Activo', date: '10/02/2025' },
-    { name: 'Cobertura Barrio Bonito', client: 'Cliente A', status: 'Cancelado', date: '01/01/2025' },
-  ];
+  constructor(
+    private clienteService: ClienteService,
+    private factibilidadService: FactibilidadService
+  ) { }
 
+  ngOnInit(): void {
+    this.loadDashboardData();
+  }
+
+  loadDashboardData(): void {
+    combineLatest([
+      this.clienteService.getAllClientes(),
+      this.factibilidadService.getFactibilidades(),
+      this.factibilidadService.getEstadosFactibilidad() // Fetch states
+    ]).subscribe(([clientes, factibilidades, estados]) => {
+      this.totalClients = clientes.length;
+      this.totalStudies = factibilidades.length;
+      this.estadosFactibilidad = estados; // Store states
+
+      this.activeStudies = factibilidades.filter(f => f.idEstadoFactibilidad === 1).length; // Assuming 1 is 'Activo'
+
+      // Sort factibilities by date and take the most recent ones
+      this.recentStudiesList = factibilidades
+        .sort((a, b) => new Date(b.fechaSolicitud).getTime() - new Date(a.fechaSolicitud).getTime())
+        .slice(0, 4); // Get top 4 recent studies
+
+      // Update summary cards
+      this.summaryCards[0].value = this.totalClients;
+      this.summaryCards[1].value = this.activeStudies;
+      this.summaryCards[2].value = this.totalStudies;
+    });
+  }
+
+  // Helper to get status name by ID
+  getStatusName(id: number): string {
+    const estado = this.estadosFactibilidad.find(e => e.idEstadoFactibilidad === id);
+    return estado ? estado.nombre : 'Desconocido';
+  }
 }

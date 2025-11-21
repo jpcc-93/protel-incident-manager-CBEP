@@ -42,11 +42,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let study of recentStudies">
-              <td>{{ study.name }}</td>
-              <td>{{ study.client }}</td>
-              <td>{{ study.status }}</td>
-              <td>{{ study.date }}</td>
+            <tr *ngFor="let study of recentStudiesList">
+              <td>{{ study.nombreProyecto }}</td>
+              <td>{{ study.cliente?.nombre }}</td>
+              <td>{{ getStatusName(study.idEstadoFactibilidad) }}</td>
+              <td>{{ study.fechaSolicitud | date: 'dd/MM/yyyy' }}</td>
             </tr>
           </tbody>
         </table>

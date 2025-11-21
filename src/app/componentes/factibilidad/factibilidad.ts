@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router'; // Importar ActivatedRoute
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs'; // Importar Observable
 import { FactibilidadService } from '../../services/factibilidad.service';
 import { ClienteService } from '../../services/cliente.service';
 import { Factibilidad as IFactibilidad } from '../../interfaces/factibilidad.interface';
 import { Cliente } from '../../interfaces/cliente.interface';
+import { EstadoFactibilidad } from '../../interfaces/estado-factibilidad.interface'; // Importar la interfaz
 
 @Component({
   selector: 'app-factibilidad',
@@ -28,16 +30,18 @@ export class Factibilidad implements OnInit {
 
   clients: Cliente[] = [];
   isEditMode: boolean = false;
+  estadosFactibilidad$!: Observable<EstadoFactibilidad[]>; // Nueva propiedad para los estados
 
   constructor(
     private factibilidadService: FactibilidadService,
     private clienteService: ClienteService,
     private router: Router,
-    private route: ActivatedRoute // Inyectar ActivatedRoute
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.loadClients();
+    this.loadEstados(); // Cargar los estados
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEditMode = true;
@@ -51,6 +55,10 @@ export class Factibilidad implements OnInit {
     this.clienteService.getClientes().subscribe(data => {
       this.clients = data.filter(cliente => cliente.idEstadoCliente === 1);
     });
+  }
+
+  loadEstados(): void {
+    this.estadosFactibilidad$ = this.factibilidadService.getEstadosFactibilidad();
   }
 
   onSubmit() {
