@@ -1,22 +1,26 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './topbar.html',
-  styleUrl: './topbar.css'
+  styleUrls: ['./topbar.css']
 })
-export class Topbar {
-  // Declara un emisor de eventos llamado 'toggleSidebar'.
-  // El componente padre (app.component) puede escuchar este evento.
+export class TopbarComponent {
   @Output() toggleSidebar = new EventEmitter<void>();
 
-  /**
-   * Se llama cuando se hace clic en el botón del menú.
-   * Emite el evento 'toggleSidebar' para notificar al componente padre.
-   */
+  constructor(public authService: AuthService, private router: Router) { }
+
   onMenuClick(): void {
     this.toggleSidebar.emit();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

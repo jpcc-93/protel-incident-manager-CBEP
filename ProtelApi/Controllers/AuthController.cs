@@ -40,9 +40,8 @@ namespace ProtelApi.Controllers
             _configuration = configuration;
         }
 
-        /* // POST: api/auth/register
-        // Este es un endpoint temporal para crear usuarios iniciales.
-        // En una aplicación real, esto estaría más protegido o manejado de otra forma.
+        // POST: api/auth/register
+        // Endpoint habilitado para crear usuarios iniciales
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto request)
         {
@@ -52,7 +51,7 @@ namespace ProtelApi.Controllers
                 return BadRequest("El nombre de usuario ya existe.");
             }
 
-            // Hashear la contraseña
+            // Hashear la contraseña usando BCrypt
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             var user = new Usuario
@@ -66,7 +65,7 @@ namespace ProtelApi.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Usuario creado exitosamente" });
-        } */
+        }
 
         // POST: api/auth/login
         [HttpPost("login")]

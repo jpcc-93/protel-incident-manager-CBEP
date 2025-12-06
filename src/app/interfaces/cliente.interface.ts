@@ -1,4 +1,5 @@
 import { EstadoCliente } from './estado-cliente.interface';
+import { Factibilidad } from './factibilidad.interface';
 
 export interface Cliente {
   idCliente: number;
@@ -13,5 +14,6 @@ export interface Cliente {
   fechaActualizacion?: Date | null; // Puede ser nulo
   idEstadoCliente: number;
   estadoCliente?: EstadoCliente; // Propiedad de navegación opcional
+  factibilidades?: Factibilidad[]; // Lista de factibilidades
   seleccionado?: boolean; // Propiedad no mapeada, opcional
 }

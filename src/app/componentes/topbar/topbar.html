@@ -9,12 +9,16 @@
 
   <!-- Iconos a la derecha -->
   <div class="topbar-right">
-    <a href="#" class="topbar-icon">
-      <i class="bi bi-three-dots-vertical"></i>
-    </a>
-    <a href="#" class="topbar-icon">
-      <i class="bi bi-person"></i>
-    </a>
+    <ng-container *ngIf="authService.currentUser | async; else loginTemplate">
+      <span class="username-display">Hola, {{ (authService.currentUser | async)?.username }}</span>
+      <a (click)="logout()" class="topbar-icon" style="cursor: pointer;" title="Salir">
+        <i class="bi bi-box-arrow-right"></i>
+      </a>
+    </ng-container>
+    <ng-template #loginTemplate>
+      <a href="/login" class="topbar-icon" title="Ingresar">
+        <i class="bi bi-person"></i>
+      </a>
+    </ng-template>
   </div>
 </nav>
-

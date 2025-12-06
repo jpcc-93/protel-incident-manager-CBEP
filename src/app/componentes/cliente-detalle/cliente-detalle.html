@@ -61,8 +61,27 @@
             <strong>Fecha de Creación:</strong> {{ cliente.fechaCreacion | date:'short' }}
           </div>
           <div class="col-md-6">
-            <strong>Última Actualización:</strong> {{ cliente.fechaActualizacion ? (cliente.fechaActualizacion | date:'short') : 'N/A' }}
+            <strong>Última Actualización:</strong> {{ cliente.fechaActualizacion ? (cliente.fechaActualizacion |
+            date:'short') : 'N/A' }}
           </div>
+          <div class="mt-4">
+            <h3>Factibilidades Asociadas</h3>
+            <div *ngIf="cliente.factibilidades && cliente.factibilidades.length > 0; else noFactibilidades">
+              <ul class="list-group">
+                <li *ngFor="let factibilidad of cliente.factibilidades" class="list-group-item">
+                  <strong>{{ factibilidad.nombreProyecto }}</strong> -
+                  <span class="badge bg-secondary">{{ factibilidad.fechaSolicitud | date:'shortDate' }}</span>
+                  <p class="mb-0 text-muted">{{ factibilidad.descripcion }}</p>
+                </li>
+              </ul>
+            </div>
+            <ng-template #noFactibilidades>
+              <div class="alert alert-info">
+                Este cliente no tiene factibilidades registradas.
+              </div>
+            </ng-template>
+          </div>
+
         </div>
       </div>
     </div>

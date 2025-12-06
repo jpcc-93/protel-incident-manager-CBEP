@@ -15,12 +15,13 @@ namespace ProtelApi.Controllers
         {
             _context = context;
         }
+
         // GET: api/Clientes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
-            {
-                return await _context.Clientes.ToListAsync();
-            }
+        {
+            return await _context.Clientes.ToListAsync();
+        }
 
         // GET: api/Clientes/search?term=...
         [HttpGet("search")]
@@ -49,7 +50,9 @@ namespace ProtelApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes
+                                        .Include(c => c.Factibilidades) // Incluir factibilidades relacionadas
+                                        .FirstOrDefaultAsync(c => c.IdCliente == id);
 
             if (cliente == null)
             {
@@ -96,25 +99,7 @@ namespace ProtelApi.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Clientes/5
-        // [HttpDelete("{id}")] // Comentado para implementar borrado lógico
-        // public async Task<IActionResult> DeleteCliente(int id)
-        // {
-        //     var cliente = await _context.Clientes.FindAsync(id);
-        //     if (cliente == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     _context.Clientes.Remove(cliente);
-        //     await _context.SaveChangesAsync();
-
-        //     return NoContent();
-        // }
-
         // PATCH: api/Clientes/SoftDelete/5
-        // Implementa el borrado lógico de un cliente, cambiando su estado a inactivo (IdEstadoCliente = 2).
-        // Se mantiene el método HttpDelete original comentado por integridad y referencia.
         [HttpPatch("SoftDelete/{id}")]
         public async Task<IActionResult> SoftDeleteCliente(int id)
         {
@@ -151,8 +136,4 @@ namespace ProtelApi.Controllers
             return _context.Clientes.Any(e => e.IdCliente == id);
         }
     }
-}       
-
-
-            
-            
+}
