@@ -4,11 +4,13 @@
 
 :host {
   display: block;
-  position: fixed; /* Fija la topbar en la parte superior */
+  position: fixed;
+  /* Fija la topbar en la parte superior */
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 1010; /* Asegura que esté por encima de la sidebar */
+  z-index: 1010;
+  /* Asegura que esté por encima de la sidebar */
 }
 
 /*
@@ -18,13 +20,15 @@
 */
 .topbar {
   display: flex;
-  justify-content: space-between; /* Empuja el botón de menú y los íconos a los extremos */
+  justify-content: space-between;
+  /* Empuja el botón de menú y los íconos a los extremos */
   align-items: center;
   height: var(--topbar-height);
   padding: 0 1.5rem;
-  background-color: #6236CB;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  /* Gradient matching login */
   color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /*
@@ -38,6 +42,19 @@
   font-size: 1.8rem;
   cursor: pointer;
   padding: 0;
+  margin-right: 1rem;
+}
+
+.brand-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-logo {
+  height: 35px;
+  width: auto;
+  /* filter: brightness(0) invert(1); Removed to show original logo colors */
 }
 
 /*
@@ -47,23 +64,33 @@
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: auto; /* Espacio entre el título y los íconos */
+  gap: 1.5rem;
 }
 
 .topbar-title {
   font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.username-display {
   font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .topbar-icon {
   color: #fff;
   font-size: 1.4rem;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
 }
 
 .topbar-icon:hover {
-  opacity: 0.8;
+  opacity: 1;
+  transform: scale(1.1);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /*

@@ -4,10 +4,14 @@
 
 :host {
   /* -- Definición de colores y fuentes base -- */
-  --sidebar-width: 250px;       /* Ancho de la barra lateral */
-  --sidebar-width-collapsed: 80px; /* Ancho de la barra lateral colapsada */
-  --topbar-height: 60px;        /* Altura de la barra superior */
-  --background-color: #f4f7fa;  /* Color de fondo principal */
+  --sidebar-width: 250px;
+  /* Ancho de la barra lateral */
+  --sidebar-width-collapsed: 80px;
+  /* Ancho de la barra lateral colapsada */
+  --topbar-height: 60px;
+  /* Altura de la barra superior */
+  --background-color: #f4f7fa;
+  /* Color de fondo principal */
   --text-color: #333;
 
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -21,10 +25,12 @@
 */
 .app-container {
   display: flex;
-  flex-direction: column; /* Organiza topbar y main-layout verticalmente */
+  flex-direction: column;
+  /* Organiza topbar y main-layout verticalmente */
   height: 100vh;
   width: 100vw;
-  overflow: hidden; /* Evita barras de scroll no deseadas en el contenedor principal */
+  overflow: hidden;
+  /* Evita barras de scroll no deseadas en el contenedor principal */
 }
 
 /*
@@ -33,8 +39,10 @@
 */
 .main-layout {
   display: flex;
-  flex-grow: 1; /* Ocupa el espacio restante después de la topbar */
-  overflow: hidden; /* Previene el desbordamiento */
+  flex-grow: 1;
+  /* Ocupa el espacio restante después de la topbar */
+  overflow: hidden;
+  /* Previene el desbordamiento */
 }
 
 /*
@@ -47,9 +55,11 @@
   flex-grow: 1;
   padding: 1.5rem;
   background-color: var(--background-color);
-  overflow-y: auto; /* Permite el scroll vertical si el contenido es muy largo */
+  overflow-y: auto;
+  /* Permite el scroll vertical si el contenido es muy largo */
   margin-left: var(--sidebar-width);
-  margin-top: var(--topbar-height); /* Espacio para la topbar fija */
+  margin-top: var(--topbar-height);
+  /* Espacio para la topbar fija */
   transition: margin-left 0.3s ease-in-out;
 }
 
@@ -74,4 +84,16 @@
   .app-container.sidebar-collapsed .main-content {
     margin-left: 0;
   }
+}
+
+/*
+  Estado sin layout (Login/Register):
+  - Elimina márgenes y padding para un diseño de pantalla completa.
+*/
+.app-container.no-layout .main-content {
+  margin-left: 0 !important;
+  margin-top: 0 !important;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
