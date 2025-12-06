@@ -12,7 +12,7 @@
   - app-navbar: La barra de navegación lateral (sidebar). Recibe el estado [isSidebarOpen] para saber si debe mostrarse o no.
   - main class="main-content": El área donde se renderizarán las rutas (tus páginas).
 -->
-<div class="app-container" [class.sidebar-collapsed]="!isSidebarOpen()">
+<div class="app-container" [class.sidebar-collapsed]="!isSidebarOpen()" [class.no-layout]="!showLayout">
 
   <!-- La barra superior emite un evento para abrir/cerrar el menú -->
   @if (showLayout) {
