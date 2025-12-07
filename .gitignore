@@ -58,3 +58,7 @@ EXPLICACION_VISTA_DETALLE.md
 
 # API Guide
 API_GUIDE.md
+
+# Secrets
+ProtelApi/appsettings.Production.json
+Conexiones_despliegue_BD.txt
