@@ -1,13 +1,14 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core'; // Importar herramientas para inyección y detección de plataforma
-import { isPlatformBrowser } from '@angular/common'; // Importar función para verificar si es navegador
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5194/api/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 

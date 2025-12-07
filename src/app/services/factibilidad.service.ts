@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Factibilidad } from '../interfaces/factibilidad.interface';
 import { EstadoFactibilidad } from '../interfaces/estado-factibilidad.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FactibilidadService {
-  private apiUrl = 'http://localhost:5194/api/factibilidades'; // URL base de la API
-  private apiEstadoUrl = 'http://localhost:5194/api/EstadoFactibilidad'; // URL para los estados
+  private apiUrl = `${environment.apiUrl}/factibilidades`; // URL base de la API
+  private apiEstadoUrl = `${environment.apiUrl}/EstadoFactibilidad`; // URL para los estados
 
   constructor(private http: HttpClient) { }
 
